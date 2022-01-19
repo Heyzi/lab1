@@ -1,0 +1,34 @@
+- name: remove if exist net.ifnames
+  lineinfile:
+   path: /etc/default/grub
+   state: present
+   regexp: '^(.*) net.ifnames=.(.*)$'
+   line: '\1\2'
+   backup: yes
+   backrefs: yes
+   
+- name: insert net.ifnames=0
+  lineinfile:
+   backrefs: true
+   path: /etc/default/grub
+   regexp: "^(GRUB_CMDLINE_LINUX=\".*)\"$"
+   line: '\1 net.ifnames=0"'
+
+- name: remove if exist biosdevname
+  lineinfile:
+   path: /etc/default/grub
+   state: present
+   regexp: '^(.*) biosdevname=.(.*)$'
+   line: '\1\2'
+   backup: yes
+   backrefs: yes
+      
+- name: insert biosdevname=0
+  lineinfile:
+   backrefs: true
+   path: /etc/default/grub
+   regexp: "^(GRUB_CMDLINE_LINUX=\".*)\"$"
+   line: '\1 biosdevname=0"'
+
+- name: update grub config
+  command: grub2-mkconfig

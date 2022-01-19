@@ -1,0 +1,23 @@
+---
+- name: Install firewalld
+  package:
+    name: firewalld
+    state: latest
+
+- name: start firewalld
+  systemd:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: enable 80
+  firewalld:
+    zone: public
+    port: 80/tcp
+    permanent: true
+    state: enabled
+
+- name: Reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

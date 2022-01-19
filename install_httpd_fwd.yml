@@ -1,0 +1,14 @@
+---
+- hosts: nodes
+  gather_facts: yes
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    ansible
+  roles:
+   - httpd_install
+   - firewalld_install
