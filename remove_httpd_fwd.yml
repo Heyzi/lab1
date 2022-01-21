@@ -1,9 +1,4 @@
 - hosts: nodes
-  gather_facts: 'yes'
-  become: true
-  become_method: sudo
-  become_user: root
-  remote_user: ansible
   roles:
     - httpd_remove
     - firewalld_remove_ports
