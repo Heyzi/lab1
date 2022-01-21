@@ -1,22 +1,19 @@
----
 - name: Install Apache Web Server
   package:
     name: httpd
     state: latest
-
 - name: start httpd
   systemd:
     name: httpd
-    enabled: yes
+    enabled: 'yes'
     state: started
-
 - name: Check status of httpd
-  service_facts:
+  service_facts: 
   register: service_state
 - debug:
-    var: service_state.ansible_facts.services["httpd.service"].state
-
+    var: 'service_state.ansible_facts.services["httpd.service"].state'
 - name: Creating custom index.html
   copy:
-   dest: "/var/www/html/index.html"
-   content: "Welcome to my web server"
+    dest: /var/www/html/index.html
+    content: Welcome to my web server
+
