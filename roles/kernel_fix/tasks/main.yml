@@ -1,3 +1,4 @@
+---
 - name: remove if exist net.ifnames
   lineinfile:
    path: /etc/default/grub
